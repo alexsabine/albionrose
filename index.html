@@ -55,7 +55,7 @@ p{margin:0 0 1em;max-width:58ch;text-wrap:pretty}
 
 .top{position:absolute;inset:0 0 auto 0;z-index:5;border-bottom:1px solid rgba(20,32,42,.12);background:rgba(255,253,248,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:56px}
-.top .mark{white-space:nowrap;font:italic 400 22px/1 var(--fell);color:var(--ink);text-decoration:none;padding:10px 0}
+.top .mark{white-space:nowrap;font:italic 400 22px/1 var(--fell);color:var(--ink);text-decoration:none;padding:10px 0;display:inline-flex;align-items:center;gap:10px}.top .mark .ball{width:28px;height:28px;display:block;flex:none}@media (max-width:560px){.top .mark{gap:7px}.top .mark .ball{width:22px;height:22px}}
 .top nav{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;margin-right:calc(var(--gutter) * -1);padding-right:var(--gutter)}
 .top nav::-webkit-scrollbar{display:none}
 .top nav a{font:400 14.5px/1 var(--caps);letter-spacing:.08em;color:var(--soft);text-decoration:none;padding:15px 11px;white-space:nowrap}
@@ -114,7 +114,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap"><a class="mark" href="#top">Albion Rose</a><nav aria-label="On this page"><a href="#what">The idea</a><a href="#examples">Resources</a><a href="#code">Our code</a><a href="#plan">The plan</a><a href="#money">Membership</a><a href="#for">Who it is for</a><a href="#name">The name</a><a href="#contact">Contact</a></nav></div></header>
+<header class="top"><div class="wrap"><a class="mark" href="#top"><img class="ball" src="img/ball.png" alt="" width="28" height="28">Albion Rose</a><nav aria-label="On this page"><a href="#what">The idea</a><a href="#examples">Resources</a><a href="#code">Our code</a><a href="#plan">The plan</a><a href="#money">Membership</a><a href="#for">Who it is for</a><a href="#name">The name</a><a href="#contact">Contact</a></nav></div></header>
 <main id="top">
 <div class="dawn">
   <div id="ball" tabindex="0" role="img" aria-label="The sphere. Drag it to spin it, or use the arrow keys. It has weight, and keeps turning after you let go."></div>
