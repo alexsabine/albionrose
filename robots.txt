@@ -1,0 +1,7 @@
+# robots.txt for https://albionrose.ai/
+# Author: Alexander Sabine
+
+User-agent: *
+Allow: /
+
+Sitemap: https://albionrose.ai/sitemap.xml
