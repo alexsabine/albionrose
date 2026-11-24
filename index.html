@@ -133,7 +133,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
    "url": "https://albionrose.ai/",
    "logo": "https://albionrose.ai/img/icon-512.png",
    "description": "An international platform for teaching and learning at the frontier, built with scientists and thinkers and open to schools, universities and public organisations. In preparation.",
-   "email": "info@honami.co.uk"
+   "email": "hello@albionrose.ai"
   },
   {
    "@type": "WebSite",
@@ -224,7 +224,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 <section class="intro" id="about">
   <div class="wrap">
     <p class="lead">An international platform for teaching and learning at the frontier. Built with scientists and thinkers, checked by them, and open to schools, universities and public organisations.</p>
-    <div class="row"><a class="btn go" href="mailto:info@honami.co.uk?subject=Albion%20Rose">Tell me when it opens</a><a class="btn" href="#what">What it will be</a></div>
+    <div class="row"><a class="btn go" href="mailto:hello@albionrose.ai?subject=Albion%20Rose">Tell me when it opens</a><a class="btn" href="#what">What it will be</a></div>
   </div>
 </section>
 
@@ -589,7 +589,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 <script>
 /* Expressions of interest. The page has nowhere to send a form, so it writes the email for the visitor and opens it in their own mail. One address, kept here. */
 (function(){
-  var TO=['info','honami.co.uk'].join('@'), f=document.getElementById('eoi'), a=document.getElementById('eoi-addr'), note=document.getElementById('eoi-note'); if(!f) return;
+  var TO=['hello','albionrose.ai'].join('@'), f=document.getElementById('eoi'), a=document.getElementById('eoi-addr'), note=document.getElementById('eoi-note'); if(!f) return;
   a.textContent=TO; a.href='mailto:'+TO+'?subject='+encodeURIComponent('Albion Rose: founding members');
   f.addEventListener('submit',function(e){ e.preventDefault(); var v=function(n){return (f.elements[n].value||'').trim()};
     if(!v('name')){ note.textContent='Please add your name, so we know who is writing.'; note.className='eoi-note warn'; f.elements.name.focus(); return; }
