@@ -397,7 +397,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
         <label for="eoi-why">What draws you to this?</label><textarea id="eoi-why" name="why" rows="3"></textarea>
         <label for="eoi-bring">What might you bring?</label><textarea id="eoi-bring" name="bring" rows="3"></textarea>
         <div class="row" style="margin-top:16px"><button class="btn go" type="submit" id="eoi-send">Send</button></div>
-        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+        <input type="text" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <p class="eoi-note" id="eoi-note" aria-live="polite">Your answers are sent to us by email through a form service, and are used only to reply to you. They are not shared or shown anywhere. You can also write to <a id="eoi-addr" href="#"></a>.</p>
       </form>
     </div>
@@ -589,7 +589,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 </script>
 <!-- /viewer -->
 <script>
-/* Expressions of interest. The page is a plain file, so the form is posted to a form service (FormSubmit), which emails it on to us. If that fails, the visitor is offered their own email instead. */
+/* Expressions of interest. The page is a plain file, so the form is posted to a form service (Web3Forms), which emails it on to us. If that fails, the visitor is offered their own email instead. */
 (function(){
   var TO=['hello','albionrose.ai'].join('@'), f=document.getElementById('eoi'), a=document.getElementById('eoi-addr'), note=document.getElementById('eoi-note'), btn=document.getElementById('eoi-send'); if(!f) return;
   a.textContent=TO; a.href='mailto:'+TO+'?subject='+encodeURIComponent('Albion Rose: founding members');
@@ -597,14 +597,15 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   f.addEventListener('submit',function(e){ e.preventDefault(); var v=function(n){return (f.elements[n].value||'').trim()};
     if(!v('name')){ say('Please add your name, so we know who is writing.',true); f.elements.name.focus(); return; }
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v('email'))){ say('Please add an email address we can reply to.',true); f.elements.email.focus(); return; }
-    if(v('_honey')) return;
+    if(v('botcheck')) return;
     btn.disabled=true; btn.textContent='Sending'; say('Sending.');
-    var body={ _subject:'Albion Rose: founding members, '+v('name'), _template:'table', _captcha:'false', _replyto:v('email'), name:v('name'), email:v('email'), 'Field and organisation':v('field'), 'What draws me to this':v('why'), 'What I might bring':v('bring') };
+    var body={ access_key:'295bc60f-2160-45ef-8ff2-f2d1e7b6498f', subject:'Albion Rose: founding members, '+v('name'), from_name:'Albion Rose', replyto:v('email'), name:v('name'), email:v('email'), 'Field and organisation':v('field'), 'What draws me to this':v('why'), 'What I might bring':v('bring') };
     var mail=document.createElement('a'); mail.textContent='Send it from your own email instead';
-    mail.href='mailto:'+TO+'?subject='+encodeURIComponent(body._subject)+'&body='+encodeURIComponent('Name: '+v('name')+'\nEmail: '+v('email')+'\n\nField and organisation: '+v('field')+'\n\nWhat draws me to this:\n'+v('why')+'\n\nWhat I might bring:\n'+v('bring')+'\n');
-    fetch('https://formsubmit.co/ajax/'+TO,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(body)})
+    mail.href='mailto:'+TO+'?subject='+encodeURIComponent(body.subject)+'&body='+encodeURIComponent('Name: '+v('name')+'\nEmail: '+v('email')+'\n\nField and organisation: '+v('field')+'\n\nWhat draws me to this:\n'+v('why')+'\n\nWhat I might bring:\n'+v('bring')+'\n');
+    var fd=new FormData(); Object.keys(body).forEach(function(k){ fd.append(k, body[k]); });
+    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Accept':'application/json'},body:fd})
       .then(function(r){ return r.json().then(function(j){ return {ok:r.ok,j:j}; }); })
-      .then(function(x){ if(x.ok && String(x.j.success)==='true'){ f.reset(); btn.textContent='Sent'; say('Thank you. Your note has reached us, and we will be in touch.'); }
+      .then(function(x){ if(x.ok && x.j && x.j.success===true){ f.reset(); btn.textContent='Sent'; say('Thank you. Your note has reached us, and we will be in touch.'); }
         else { throw new Error(x.j && x.j.message || 'not sent'); } })
       .catch(function(){ btn.disabled=false; btn.textContent='Send'; say('That did not send.',true,mail); });
   });
